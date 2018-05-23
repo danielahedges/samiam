@@ -4,8 +4,8 @@
   "description": "Seed project for an ES6 MEAN site",
   "main": "server.js",
   "scripts": {
-    "build": "npx babel src -d build",
-    "start": "node server.js"
+    "build": "npx babel src -s -d build",
+    "start": "node build/server.js"
   },
   "keywords": [
     "MongoDB",
@@ -16,7 +16,8 @@
   "author": "Dan Hedges",
   "license": "MIT",
   "dependencies": {
-    "express": "~4.16.3"
+    "express": "~4.16.3",
+    "source-map-support": "~0.5.6"
   },
   "devDependencies": {
     "babel-cli": "~6.26.0",
