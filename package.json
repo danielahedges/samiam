@@ -1,0 +1,25 @@
+{
+  "name": "seed2",
+  "version": "0.2.0",
+  "description": "Seed project for an ES6 MEAN site",
+  "main": "server.js",
+  "scripts": {
+    "build": "npx babel src -d build",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "Angular",
+    "Node"
+  ],
+  "author": "Dan Hedges",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "~6.26.0",
+    "babel-preset-env": "~1.7.0"
+  }
+}
