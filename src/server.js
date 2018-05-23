@@ -1,4 +1,4 @@
-import {init} from './core/server/config/express';
+import { init } from './core/server/config/express';
 import sourceMapSupport from 'source-map-support';
 
 sourceMapSupport.install();
