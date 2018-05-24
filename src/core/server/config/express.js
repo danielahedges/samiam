@@ -1,10 +1,13 @@
 import express from 'express';
+import session from 'express-session';
 import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
-import { register } from '../routes/index.server.core.routes';
-import { moduleList } from '../../../modules.js';
+import { IndexRoutes } from '../routes/index.server.core.routes';
+import { UserRoutes } from '../routes/user.server.core.routes';
+import { moduleList } from '../../../modules';
+import { CONFIG } from './config';
 import _ from 'lodash';
 
 export function init() {
@@ -24,9 +27,21 @@ export function init() {
   app.use(bodyParser.json());
   app.use(methodOverride());
 
+  app.use(
+    session({
+      saveUninitialized: true,
+      resave: true,
+      secret: CONFIG.sessionSecret
+    })
+  );
+
   app.set('views', _.map(moduleList, module => './src/' + module + '/views'));
   app.set('view engine', 'pug');
 
-  register(app);
+  app.use(express.static('./public'));
+
+  IndexRoutes.init(app);
+  UserRoutes.init(app);
+
   return app;
 }

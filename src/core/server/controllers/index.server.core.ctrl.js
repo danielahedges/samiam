@@ -1,5 +1,7 @@
-export function render(req, res) {
-  res.render('index', {
-    title: 'Hello World'
-  });
+export class IndexController {
+  static render(req, res) {
+    res.render('index', {
+      title: 'Hello World'
+    });
+  }
 }
