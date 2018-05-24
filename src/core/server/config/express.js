@@ -4,6 +4,8 @@ import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
+import passport from 'passport';
+import connectFlash from 'connect-flash';
 import { IndexRoutes } from '../routes/index.server.core.routes';
 import { UserRoutes } from '../routes/user.server.core.routes';
 import { moduleList } from '../../../modules';
@@ -37,6 +39,10 @@ export function init() {
 
   app.set('views', _.map(moduleList, module => './src/' + module + '/views'));
   app.set('view engine', 'pug');
+
+  app.use(connectFlash());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   app.use(express.static('./public'));
 

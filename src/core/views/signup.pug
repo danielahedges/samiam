@@ -1,0 +1,24 @@
+html
+  head
+    title #{title}
+  body
+    - for (var i in messages)
+      div.flash #{messages[i]}
+    form(action="signup" method="post")
+      div
+        label First Name:
+        input(type="text" name="firstName")
+      div
+        label Last Name:
+        input(type="text" name="lastName")
+      div
+        label Email:
+        input(type="text" name="email")
+      div
+        label Username:
+        input(type="text" name="username")
+      div
+        label Password:
+        input(type="password" name="password")
+      div
+        input(type="submit" value="Sign up")

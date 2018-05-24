@@ -2,4 +2,11 @@ html
 	head
 		title #{title}
 	body
-		h1 #{title}
+		- if ( userFullName ) {
+			h2 Hello #{userFullName}
+			a(href="/signout") Sign Out
+		- } else {
+			a(href="/signup") Sign Up
+			br
+			a(href="/signin") Sign In
+		- }
