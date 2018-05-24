@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "npx babel src -s -d build",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "watch": "npx babel src -s -d build --watch"
   },
   "keywords": [
     "MongoDB",
