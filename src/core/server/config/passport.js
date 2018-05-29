@@ -1,6 +1,9 @@
 import passport from 'passport';
 import mongoose from 'mongoose';
 import { LocalStrategyConfig } from './strategies/local';
+import { FacebookStrategyConfig } from './strategies/facebook';
+import { TwitterStrategyConfig } from './strategies/twitter';
+import { GoogleStrategyConfig } from './strategies/google';
 
 export class PassportConfig {
   static init() {
@@ -20,5 +23,8 @@ export class PassportConfig {
       );
     });
     LocalStrategyConfig.init();
+    FacebookStrategyConfig.init();
+    TwitterStrategyConfig.init();
+    GoogleStrategyConfig.init();
   }
 }

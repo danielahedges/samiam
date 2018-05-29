@@ -73,4 +73,30 @@ export class UserController {
     req.logout();
     res.redirect('/');
   }
+  static saveOAuthUserProfile(req, profile, done) {
+    User.findOne(
+      {
+        provider: profile.provider,
+        providerId: profile.providerId
+      },
+      (err, user) => {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          const possibleUsername =
+            profile.username ||
+            (profile.email ? profile.email.split('@')[0] : '');
+          User.findUniqueUsername(possibleUsername, null, availableUsername => {
+            const newUser = new User(profile);
+            newUser.username = availableUsername;
+            newUser.save(err => {
+              return done(err, newUser);
+            });
+          });
+        }
+        return done(err, user);
+      }
+    );
+  }
 }
