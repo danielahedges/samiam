@@ -1,0 +1,36 @@
+version: '2'
+services:
+  staging-deps:
+    image: monocot
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo:27017/db
+    networks:
+      - default
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - default
+  staging:
+    image: node:10-alpine
+    volumes:
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    networks:
+      - default
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/db
+    command: npm run test:staging
+  clean:
+    extends:
+      service: staging
+    command: rm -rf node_modules
+  install:
+    extends:
+      service: staging
+    command: npm install

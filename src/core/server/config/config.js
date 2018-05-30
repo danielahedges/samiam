@@ -1,3 +1,2 @@
-export const CONFIG = require('./env/' +
-  process.env.NODE_ENV +
-  '.env.config.js');
+const env = process.env.NODE_ENV || 'development';
+export const CONFIG = require('./env/' + env + '.env.config.js');

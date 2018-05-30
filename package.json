@@ -1,12 +1,15 @@
 {
-  "name": "seed2",
+  "name": "monocot",
   "version": "0.2.0",
   "description": "Seed project for an ES6 MEAN site",
   "main": "server.js",
   "scripts": {
     "build": "npx babel src -s -d build",
     "start": "node build/server.js",
-    "watch": "npx babel src -s -d build --watch"
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "watch": "npx babel src -s -d build --watch",
+    "test:staging": "ls"
   },
   "keywords": [
     "MongoDB",
