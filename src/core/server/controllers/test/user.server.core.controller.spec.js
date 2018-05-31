@@ -13,8 +13,7 @@ var mockConfig = {
   CONFIG: {}
 };
 
-var mockUser = {
-};
+var mockUser = {};
 
 var sandbox = sinon.createSandbox();
 
@@ -28,12 +27,16 @@ describe('user.server.core.controller', () => {
     uut = require('../user.server.core.controller').UserController;
   });
   after(() => {
+    mockery.deregisterAll();
     mockery.disable();
+    sandbox.restore();
   });
   describe('init', () => {
     var stubs = {};
     before(() => {
-      stubs.mongooseModel = sandbox.stub(mockMongoose, 'model').returns(mockUser);
+      stubs.mongooseModel = sandbox
+        .stub(mockMongoose, 'model')
+        .returns(mockUser);
     });
     after(() => {
       sandbox.restore();
