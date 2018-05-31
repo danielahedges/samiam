@@ -12,8 +12,8 @@ ADD ./.babelrc /src/.babelrc
 ADD ./.eslintrc.js /src/.eslintrc.js
 
 RUN npm run lint
-# RUN npm run test
 RUN npm run build
+RUN npm run test
 RUN npm prune --production
 
 FROM node:10-alpine
