@@ -10,6 +10,8 @@ services:
       - default
     depends_on:
       - mongo
+    ports:
+      - 3000:3000
   mongo:
     image: mongo
     ports:
