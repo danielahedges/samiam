@@ -1,5 +1,7 @@
 # Monocot
 
+[![Known Vulnerabilities](https://snyk.io/test/github/{username}/{repo}/badge.svg)](https://snyk.io/test/github/{username}/{repo})
+
 Seed project for a MEAN site, with user authentication, testing, material design
 look and feel, and CI/CD.
 
