@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { CONFIG } from '../config/config';
 
 function getErrorMessage(err) {
   let message = '';
@@ -31,7 +32,12 @@ export class UserController {
     if (!req.user) {
       res.render('signin', {
         title: 'Sign-in Form',
-        messages: req.flash('error') || req.flash('info')
+        messages: req.flash('error') || req.flash('info'),
+        auth: {
+          google: CONFIG.google.enabled,
+          twitter: CONFIG.twitter.enabled,
+          facebook: CONFIG.facebook.enabled
+        }
       });
     } else {
       return res.redirect('/');

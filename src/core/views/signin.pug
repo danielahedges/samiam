@@ -13,12 +13,12 @@ html
         input(type="password" name="password")
       div
         input(type="submit" value="Sign In")
-    - if (oauth.facebook)
+    - if (auth.facebook)
       div
         a(href="/oauth/facebook") Sign In With Facebook
-    - if (oauth.twitter)
+    - if (auth.twitter)
       div
         a(href="/oauth/twitter") Sign In With Twitter
-    - if (oauth.google)
+    - if (auth.google)
       div
         a(href="/oauth/google") Sign In With Google
