@@ -1,5 +1,6 @@
 # Monocot
 
+[![Run Status](https://api.shippable.com/projects/5b116041ddd0cc0600eb56b4/badge?branch=master)](https://app.shippable.com/github/danielahedges/monocot)
 [![Known Vulnerabilities](https://snyk.io/test/github/danielahedges/monocot/badge.svg)](https://snyk.io/test/github/danielahedges/monocot)
 
 Seed project for a MEAN site, with user authentication, testing, material design
