@@ -1,0 +1,10 @@
+language: node_js
+branches:
+  only:
+    - master
+env:
+  global:
+    - NODE_ENV=development
+build:
+  ci:
+    make ci
