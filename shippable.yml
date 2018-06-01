@@ -7,4 +7,4 @@ env:
     - NODE_ENV=development
 build:
   ci:
-    make ci
+    npm test
