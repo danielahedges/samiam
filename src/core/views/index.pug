@@ -1,12 +1,12 @@
-html
-	head
-		title #{title}
-	body
-		- if ( userFullName ) {
-			h2 Hello #{userFullName}
-			a(href="/signout") Sign Out
-		- } else {
-			a(href="/signup") Sign Up
-			br
-			a(href="/signin") Sign In
-		- }
+extends layout
+
+block content
+	if user
+		div.container
+			section(ng-view)
+	else
+		// No user logged in.
+		div.container
+			include messages
+			include loginForm
+			h3 {{'INDEX.SIGNUP' | translate}}

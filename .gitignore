@@ -2,3 +2,4 @@ build/
 node_modules/
 logs/
 .DS_Store
+npm-debug.log

@@ -1,0 +1,20 @@
+- if (auth.facebook)
+  div
+    a(href="/oauth/facebook") Sign In With Facebook
+- if (auth.twitter)
+  div
+    a(href="/oauth/twitter") Sign In With Twitter
+- if (auth.google)
+  div
+    a(href="/oauth/google") Sign In With Google
+form(action="/signin" method="post")
+  div.input-field
+    i.material-icons.prefix account_box
+    input(id="username" name="username" type="text" autocomplete="username")
+    label(for="username") {{'INDEX.USERNAME' | translate}}
+  div.input-field
+    i.material-icons.prefix lock
+    input(id="password" name="password" type="password" autocomplete="current-password")
+    label(for="password") {{'INDEX.PASSWORD' | translate}}
+  div.input-field
+    input.btn.waves-effect.waves-light(type="submit" data-ng-value="'INDEX.LOGIN_BUTTON' | translate")

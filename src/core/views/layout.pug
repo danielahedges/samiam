@@ -1,0 +1,45 @@
+doctype html
+html
+  head(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel='stylesheet', href='//fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Fredoka+One')
+    link(rel='stylesheet', href='/lib/materialize-css/dist/css/materialize.min.css')
+    link(rel='stylesheet', href='/css/main.css')
+  body
+    header
+      nav(role="navigation")
+        div.nav-wrapper.container
+          a.brand-logo#logo-container(href="/#!/")
+            | #{title}
+          mixin links
+            if (user == null)
+              li
+                a(href="/login") {{ 'NAVBAR.LOGIN' | translate }}
+              li
+                a(href="/signup") {{ 'NAVBAR.SIGNUP' | translate }}
+            else
+              li.orange-text
+                a.brown-text.disabled(href="/#!/") #{username}
+              li
+                a(href="/signout") {{ 'NAVBAR.LOGOUT' | translate }}
+          ul.side-nav#nav-mobile
+            +links
+          ul.right.hide-on-med-and-down
+            +links
+          a.button-collapse(data-activates="nav-mobile" href="#")
+            i.material-icons menu
+    main
+      block content
+    
+    // third-party libraries
+    script(type="text/javascript", src="/lib/jquery/dist/jquery.min.js")
+    script(type="text/javascript", src="/lib/materialize-css/dist/js/materialize.js")
+    script(type="text/javascript", src="/lib/angular/angular.js")
+    script(type="text/javascript", src="/lib/angular-route/angular-route.min.js")
+    script(type="text/javascript", src="/lib/angular-resource/angular-resource.min.js")
+    script(type="text/javascript", src="/lib/angular-translate/dist/angular-translate.min.js")
+    script(type="text/javascript", src="/lib/angular-sanitize/angular-sanitize.min.js")
+    
+    script(type="text/javascript", src="/lang/english.lang.js")
+    script(type="text/javascript", src="/js/main.js")
