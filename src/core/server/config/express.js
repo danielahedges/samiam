@@ -37,7 +37,7 @@ export function init() {
     })
   );
 
-  app.set('views', _.map(moduleList, module => './src/' + module + '/views'));
+  app.set('views', _.map(moduleList, module => './build/' + module + '/views'));
   app.set('view engine', 'pug');
 
   app.use(connectFlash());

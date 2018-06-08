@@ -27,7 +27,6 @@ WORKDIR $DIR
 COPY --from=build /src/package.json package.json
 COPY --from=build /src/package-lock.json package-lock.json
 COPY --from=build /src/build build
-COPY --from=build /src/src src
 COPY --from=build /src/public public
 COPY --from=build /src/node_modules node_modules
 
