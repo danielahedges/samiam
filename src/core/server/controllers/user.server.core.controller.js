@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { CONFIG } from '../config/config';
+import passport from 'passport';
+// import { CONFIG } from '../config/config';
 
 function getErrorMessage(err) {
   let message = '';
@@ -28,57 +29,56 @@ export class UserController {
   static init() {
     User = mongoose.model('User');
   }
-  static renderSignIn(req, res) {
-    if (!req.user) {
-      res.render('signin', {
-        title: 'Sign-in Form',
-        messages: req.flash('error') || req.flash('info'),
-        auth: {
-          google: CONFIG.google.enabled,
-          twitter: CONFIG.twitter.enabled,
-          facebook: CONFIG.facebook.enabled
+
+  static signin(req, res, next) {
+    passport.authenticate('local', (err, user, info) => {
+      if (err || !user) {
+        res.status(400).send(info);
+      }
+      // Remove password data
+      user.password = undefined;
+      user.salt = undefined;
+
+      req.login(user, err => {
+        if (err) {
+          res.status(400).send(err);
         }
+        res.json(user);
       });
-    } else {
-      return res.redirect('/');
-    }
+    })(req, res, next);
   }
-  static renderSignup(req, res) {
-    if (!req.user) {
-      res.render('signup', {
-        title: 'Sign-up Form',
-        messages: req.flash('error')
-      });
-    } else {
-      return res.redirect('/');
-    }
-  }
-  static signup(req, res, next) {
+
+  static signup(req, res) {
     if (!req.user) {
       const user = new User(req.body);
       user.provider = 'local';
       user.save(err => {
         if (err) {
           const message = getErrorMessage(err);
-          req.flash('error', message);
-          return res.redirect('/signup');
+          return res.status(400).send(message);
         }
+        // Remove sensitive data before login
+        user.password = undefined;
+        user.salt = undefined;
+
         req.login(user, err => {
           if (err) {
-            return next(err);
+            return res.status(400).send(err);
           }
-          return res.redirect('/');
+          return res.json(user);
         });
       });
     } else {
       return res.redirect('/');
     }
   }
+
   static signout(req, res) {
     req.logout();
     res.redirect('/');
   }
-  static saveOAuthUserProfile(req, profile, done) {
+
+  static saveOAuthUserProfile(req, res, profile, done) {
     User.findOne(
       {
         provider: profile.provider,
@@ -93,9 +93,14 @@ export class UserController {
             profile.username ||
             (profile.email ? profile.email.split('@')[0] : '');
           User.findUniqueUsername(possibleUsername, null, availableUsername => {
+            profile.username = availableUsername;
             const newUser = new User(profile);
-            newUser.username = availableUsername;
             newUser.save(err => {
+              if (err) {
+                const message = getErrorMessage(err);
+                req.flash('error', message);
+                return res.redirect('/signup');
+              }
               return done(err, newUser);
             });
           });

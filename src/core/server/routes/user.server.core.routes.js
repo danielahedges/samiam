@@ -4,42 +4,38 @@ import { UserController } from '../controllers/user.server.core.controller';
 export class UserRoutes {
   static init(app) {
     UserController.init();
-    app
-      .route('/signup')
-      .get(UserController.renderSignup)
-      .post(UserController.signup);
-    app
-      .route('/signin')
-      .get(UserController.renderSignIn)
-      .post(
-        passport.authenticate('local', {
-          successRedirect: '/',
-          failureRedirect: '/signin',
-          failureFlash: true
-        })
-      );
-    app.get('/signout', UserController.signout);
+
+    app.route('/api/auth/signup').post(UserController.signup);
+    app.route('/api/auth/signin').post(UserController.signin);
+    app.route('/api/auth/signout').get(UserController.signout);
     app.get(
-      '/oauth/facebook',
+      '/api/oauth/facebook',
       passport.authenticate('facebook', {
         failureRedirect: '/signin'
       })
     );
     app.get(
-      '/oauth/twitter',
+      '/api/oauth/facebook/callback',
+      passport.authenticate('facebook', {
+        failureRedirect: '/signin',
+        successRedirect: '/'
+      })
+    );
+    app.get(
+      '/api/oauth/twitter',
       passport.authenticate('twitter', {
         failureRedirect: '/signin'
       })
     );
     app.get(
-      '/oauth/twitter/callback',
+      '/api/oauth/twitter/callback',
       passport.authenticate('twitter', {
         failureRedirect: '/signin',
         successRedirect: '/'
       })
     );
     app.get(
-      '/oauth/google',
+      '/api/oauth/google',
       passport.authenticate('google', {
         failureRedirect: '/signin',
         scope: [
@@ -49,7 +45,7 @@ export class UserRoutes {
       })
     );
     app.get(
-      '/oauth/google/callback',
+      '/api/oauth/google/callback',
       passport.authenticate('google', {
         failureRedirect: '/signin',
         successRedirect: '/'

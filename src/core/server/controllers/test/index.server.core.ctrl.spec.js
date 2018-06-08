@@ -33,7 +33,10 @@ describe('index.server.core.ctrl', () => {
   it('render index', () => {
     const mockReq = {
         user: {
-          fullName: 'Harold T. Pants'
+          id: 'fake-user-id',
+          firstName: 'Harold',
+          lastName: 'Pants',
+          ignoredField: 'ignoreMe'
         }
       },
       mockRes = {
@@ -45,7 +48,11 @@ describe('index.server.core.ctrl', () => {
       'index',
       {
         title: 'Hello World',
-        userFullName: mockReq.user.fullName,
+        user: {
+          _id: 'fake-user-id',
+          firstName: 'Harold',
+          lastName: 'Pants'
+        },
         auth: {
           google: true,
           facebook: false,

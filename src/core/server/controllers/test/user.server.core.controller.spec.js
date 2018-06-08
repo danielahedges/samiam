@@ -9,9 +9,11 @@ var mockMongoose = {
   }
 };
 
-var mockConfig = {
-  CONFIG: {}
-};
+var mockPassport = {};
+
+// var mockConfig = {
+//   CONFIG: {}
+// };
 
 var mockUser = {};
 
@@ -22,7 +24,8 @@ describe('user.server.core.controller', () => {
   before(() => {
     mockery.enable();
     mockery.registerMock('mongoose', mockMongoose);
-    mockery.registerMock('../config/config', mockConfig);
+    // mockery.registerMock('../config/config', mockConfig);
+    mockery.registerMock('passport', mockPassport);
     mockery.registerAllowable('../user.server.core.controller');
     uut = require('../user.server.core.controller').UserController;
   });
@@ -46,5 +49,17 @@ describe('user.server.core.controller', () => {
       expect(stubs.mongooseModel.calledOnce).to.eql(true);
       expect(stubs.mongooseModel.getCall(0).args).to.eql(['User']);
     });
+  });
+  describe('signin', () => {
+    // TODO
+  });
+  describe('signup', () => {
+    // TODO
+  });
+  describe('signout', () => {
+    // TODO
+  });
+  describe('saveOAuthUserProfile', () => {
+    // TODO
   });
 });
