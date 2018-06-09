@@ -15,6 +15,8 @@ var mockConfig = {
 
 var mockUser = {};
 
+var mockZxcvbn = {};
+
 var sandbox = sinon.createSandbox();
 
 describe('user.server.core.controller', () => {
@@ -23,6 +25,7 @@ describe('user.server.core.controller', () => {
     mockery.enable();
     mockery.registerMock('mongoose', mockMongoose);
     mockery.registerMock('../config/config', mockConfig);
+    mockery.registerMock('zxcvbn', mockZxcvbn);
     mockery.registerAllowable('../user.server.core.controller');
     uut = require('../user.server.core.controller').UserController;
   });
