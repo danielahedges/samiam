@@ -56,7 +56,7 @@ class UserController {
   }
   refreshPasswordMeter() {
     var val = angular.element(document.querySelector('#new-password'))[0].value;
-    this.deps.PasswordService.checkStrength(val, this._setPasswordStrength);
+    this.deps.PasswordService.checkStrength(val, (result) => this._setPasswordStrength(result));
   }
   passwordIsStrongEnough() {
     return this.password !== '' && this.score >= 1;

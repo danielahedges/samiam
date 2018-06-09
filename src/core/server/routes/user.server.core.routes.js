@@ -18,6 +18,12 @@ export class UserRoutes {
           failureFlash: true
         })
       );
+    // app.route('/password')
+    //   .post(UserController.requiresLogin, UserController.changePassword);
+
+    app.route('/passwordStrength')
+      .post(UserController.checkPasswordStrength);
+
     app.get('/signout', UserController.signout);
     app.get(
       '/oauth/facebook',

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { CONFIG } from '../config/config';
+import zxcvbn from 'zxcvbn';
 
 function getErrorMessage(err) {
   let message = '';
@@ -77,6 +78,17 @@ export class UserController {
   static signout(req, res) {
     req.logout();
     res.redirect('/');
+  }
+  static checkPasswordStrength(req, res) {
+    let result, password = req.body.password;
+    if (password == null) {
+      return res.status(400).send({message: 'missing parameter'});
+    }
+    result = zxcvbn(password);
+    return res.json({
+      score: result.score,
+      feedback: result.feedback
+    });
   }
   static saveOAuthUserProfile(req, profile, done) {
     User.findOne(
