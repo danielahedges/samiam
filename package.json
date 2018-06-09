@@ -15,8 +15,7 @@
     "watch": "./scripts/watch",
     "test": "npx mocha build/**/*.spec.js",
     "test:staging": "ls",
-    "precommit": "npm run lint:fix && npm run test",
-    "prepush": "make ci"
+    "precommit": "npm run lint:fix && npm run test"
   },
   "keywords": [
     "MongoDB",
