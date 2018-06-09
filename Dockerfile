@@ -7,9 +7,11 @@ ADD ./package-lock.json /src/package-lock.json
 WORKDIR /src
 RUN npm install
 ADD ./public /src/public
+ADD ./scripts /src/scripts
 ADD ./src /src/src
 ADD ./.babelrc /src/.babelrc
 ADD ./.eslintrc.js /src/.eslintrc.js
+ADD ./gulpfile.js /src/gulpfile.js
 
 RUN npm run lint
 RUN npm run build
