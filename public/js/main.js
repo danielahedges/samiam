@@ -4,8 +4,8 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [
   'ngRoute',
   'ngResource',
   'pascalprecht.translate',
-  'ngSanitize'
-  // 'Users'
+  'ngSanitize',
+  'Core'
 ]);
 
 // Configure this site to use hashbang navigation, for SEO of links inside the

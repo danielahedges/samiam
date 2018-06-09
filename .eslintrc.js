@@ -8,6 +8,11 @@ module.exports = {
   parserOptions: {
     sourceType: 'module'
   },
+  globals: {
+    jQuery: true,
+    $: true,
+    angular: true
+  },
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],

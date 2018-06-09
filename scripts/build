@@ -1,0 +1,2 @@
+#!/bin/sh
+npx babel src -s -d build --copy-files && npx gulp build

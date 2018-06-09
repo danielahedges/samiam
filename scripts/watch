@@ -1,0 +1,4 @@
+#!/bin/sh
+npx concurrently \
+  "npx babel src -s -d build --watch --copy-files" \
+  "npx gulp watch"
