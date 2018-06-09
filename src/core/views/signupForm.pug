@@ -1,18 +1,19 @@
-- if (auth.facebook)
-  div
-    a(href="/oauth/facebook") Sign In With Facebook
-- if (auth.twitter)
-  div
-    a(href="/oauth/twitter") Sign In With Twitter
-- if (auth.google)
-  div
-    a(href="/oauth/google") Sign In With Google
-form#sign-up-form(method="post" action="/signup")
-  div.input-field
-    i.material-icons.prefix account_box
-    input(id="usernameSignup", name="username", type="text", autocapitalize="none", autocorrect="off", required)
-    label(for="username") Username
-  include passwordWidget
-  div.input-field
-    input(type="hidden", name="code", value=signupcode)
-    button.btn(type="submit", data-ng-disabled="!validate()") {{ 'INDEX.SIGNUP' | translate }}
+div(data-ng-controller="UserController as ctrl", data-ng-init="ctrl.initSignUp()")
+  - if (auth.facebook)
+    div
+      a(href="/oauth/facebook") Sign In With Facebook
+  - if (auth.twitter)
+    div
+      a(href="/oauth/twitter") Sign In With Twitter
+  - if (auth.google)
+    div
+      a(href="/oauth/google") Sign In With Google
+  form#sign-up-form(method="post" action="/signup")
+    div.input-field
+      i.material-icons.prefix account_box
+      input(id="usernameSignup", name="username", type="text", autocapitalize="none", autocorrect="off", required)
+      label(for="username") Username
+    include passwordWidget
+    div.input-field
+      input(type="hidden", name="code", value=signupcode)
+      button.btn(type="submit", data-ng-disabled="!ctrl.validate()") {{ 'INDEX.SIGNUP' | translate }}
