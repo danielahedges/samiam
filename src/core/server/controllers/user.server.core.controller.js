@@ -117,4 +117,60 @@ export class UserController {
       }
     );
   }
+  static partialRedirectToLogin (req, res, next) {
+    if (!req.isAuthenticated || !req.user) {
+      return res.redirect('/views/core/login');
+    }
+    next();
+  }
+  static partialRedirectOnProvisional (req, res, next) {
+    if (req.isAuthenticated && req.user.provisional) {
+      return res.render('views/core/changePassword', {
+        messages: ['MESSAGES.YOU_MUST_CHANGE_PASSWORD']
+      });
+    }
+    next();
+  }
+  static requiresAdmin(req, res, next) {
+    if (!req.user || !req.user.admin) {
+      return res.status(403).send({
+        message: 'User is not authorized'
+      });
+    }
+    next();
+  }
+  static fetchTargetUser (req, res, next, id) {
+    if (!id) {
+      return res.status(400).send({message: 'Could not find target user'});
+    }
+    User.findById(id, (err, targetUser) => {
+      if (err || !targetUser) {
+        return res.status(400).send({message: 'Could not find target user'});
+      }
+      req.targetUser = targetUser;
+      next();
+    });
+  }
+  static resetPassword(req, res) {
+    if (!req.user.admin || !req.targetUser || !req.body.newPassword) {
+      return res.status(403).send({message: 'Unauthorized Transaction'});
+    }
+    req.targetUser.setPassword(req.body.newPassword, (err, targetUser) => {
+      targetUser.provisional = true;
+      targetUser.save(err => {
+        if (err) {
+          return res.status(400).send({message: getErrorMessage(err)});
+        }
+        return res.json({});
+      });
+    });
+  }
+  static requiresLogin(req, res, next) {
+    if (!req.isAuthenticated() || req.user.lockedOut || req.user.provisional) {
+      return res.status(401).send({
+        message: 'User is not logged in'
+      });
+    }
+    next();
+  }
 }
