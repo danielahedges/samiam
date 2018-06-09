@@ -15,5 +15,7 @@ div(data-ng-controller="UserController as ctrl", data-ng-init="ctrl.initSignUp()
       label(for="username") Username
     include passwordWidget
     div.input-field
-      input(type="hidden", name="code", value=signupcode)
-      button.btn(type="submit", data-ng-disabled="!ctrl.validate()") {{ 'INDEX.SIGNUP' | translate }}
+      //- input(type="hidden", name="code", value=signupcode)
+      input.btn(type="submit",
+        data-ng-disabled="!ctrl.validate()",
+        data-ng-value=" 'INDEX.SIGNUP' | translate ")

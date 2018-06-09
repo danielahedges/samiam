@@ -1,24 +1,6 @@
-html
-  head
-    title #{title}
-  body
-    - for (var i in messages)
-      div.flash #{messages[i]}
-    form(action="/signin" method="post")
-      div
-        label Username:
-        input(type="text" name="username")
-      div
-        label Password:
-        input(type="password" name="password")
-      div
-        input(type="submit" value="Sign In")
-    - if (auth.facebook)
-      div
-        a(href="/oauth/facebook") Sign In With Facebook
-    - if (auth.twitter)
-      div
-        a(href="/oauth/twitter") Sign In With Twitter
-    - if (auth.google)
-      div
-        a(href="/oauth/google") Sign In With Google
+extends layout
+
+block content
+  div.container
+    include messages
+    include loginForm

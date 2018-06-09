@@ -4,12 +4,6 @@ import crypto from 'crypto';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
-  email: {
-    type: String,
-    match: [/.+@.+\..+/, 'Please fill a valid e-mail address']
-  },
   username: {
     type: String,
     unique: true,
@@ -17,13 +11,7 @@ const UserSchema = new Schema({
     trim: true
   },
   password: {
-    type: String,
-    validate: [
-      password => {
-        return password && password.length > 6;
-      },
-      'Password should be longer'
-    ]
+    type: String
   },
   salt: {
     type: String
@@ -39,16 +27,6 @@ const UserSchema = new Schema({
     default: Date.now
   }
 });
-
-UserSchema.virtual('fullName')
-  .get(function() {
-    return this.firstName + ' ' + this.lastName;
-  })
-  .set(function(fullName) {
-    const splitName = fullName.split(' ');
-    this.firstName = splitName[0] || '';
-    this.lastName = splitName[1] || '';
-  });
 
 UserSchema.pre('save', function(next) {
   if (this.password) {

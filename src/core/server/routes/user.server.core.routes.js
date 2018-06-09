@@ -8,6 +8,7 @@ export class UserRoutes {
       .route('/signup')
       .get(UserController.renderSignup)
       .post(UserController.signup);
+      
     app
       .route('/signin')
       .get(UserController.renderSignIn)

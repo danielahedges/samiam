@@ -23,6 +23,18 @@ function getErrorMessage(err) {
   return message;
 }
 
+function getLayoutRender(req, title) {
+  return {
+    title,
+    messages: req.flash('error') || req.flash('info'),
+    auth: {
+      google: CONFIG.google.enabled,
+      twitter: CONFIG.twitter.enabled,
+      facebook: CONFIG.facebook.enabled
+    }
+  };
+}
+
 var User;
 
 export class UserController {
@@ -31,25 +43,14 @@ export class UserController {
   }
   static renderSignIn(req, res) {
     if (!req.user) {
-      res.render('signin', {
-        title: 'Sign-in Form',
-        messages: req.flash('error') || req.flash('info'),
-        auth: {
-          google: CONFIG.google.enabled,
-          twitter: CONFIG.twitter.enabled,
-          facebook: CONFIG.facebook.enabled
-        }
-      });
+      res.render('signin', getLayoutRender(req, 'Sign-in Form'));
     } else {
       return res.redirect('/');
     }
   }
   static renderSignup(req, res) {
     if (!req.user) {
-      res.render('signup', {
-        title: 'Sign-up Form',
-        messages: req.flash('error')
-      });
+      res.render('signup', getLayoutRender(req, 'Sign-up Form'));
     } else {
       return res.redirect('/');
     }
