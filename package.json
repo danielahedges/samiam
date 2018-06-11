@@ -2,7 +2,7 @@
   "name": "monocot",
   "version": "0.2.0",
   "description": "Seed project for an ES6 MEAN site",
-  "main": "server.js",
+  "main": "build/server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/danielahedges/monocot.git"
@@ -15,14 +15,10 @@
     "watch": "./scripts/watch",
     "test": "npx mocha build/**/*.spec.js",
     "test:staging": "ls",
-    "precommit": "npm run lint:fix && npm run test"
+    "precommit": "npm run lint:fix && npm run test",
+    "postinstall": "./scripts/build"
   },
-  "keywords": [
-    "MongoDB",
-    "Express",
-    "Angular",
-    "Node"
-  ],
+  "keywords": ["MongoDB", "Express", "Angular", "Node"],
   "author": "Dan Hedges",
   "license": "MIT",
   "dependencies": {

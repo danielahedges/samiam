@@ -2,7 +2,7 @@ const url = process.env.APP_URL || 'http://localhost:6005';
 
 module.exports = {
   name: 'dev',
-  db: 'mongodb://localhost/monocot',
+  db: process.env.MONGODB_CONNECT || 'mongodb://localhost/monocot',
   sessionSecret: 'sprawledCounterfeitCountersignedLozenge',
   facebook: {
     enabled: !!process.env.FACEBOOK_OAUTH_ENABLED,
