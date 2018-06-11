@@ -23,14 +23,20 @@ html
                 a.brown-text.disabled(href="/#!/") #{username}
               li
                 a(href="/signout") {{ 'NAVBAR.LOGOUT' | translate }}
-          ul.side-nav#nav-mobile
+          ul.side-nav.hide-on-large-only#nav-mobile
             +links
           ul.right.hide-on-med-and-down
             +links
-          a.button-collapse(data-activates="nav-mobile" href="#")
+          a.button-collapse.hide-on-large-only(data-activates="nav-mobile" href="#")
             i.material-icons menu
     main
       block content
+        
+    script(type='text/javascript')
+      - if (user)
+        | window.user = !{user};
+      - else
+        | window.user = null;
     
     // third-party libraries
     script(type="text/javascript", src="/lib/jquery/dist/jquery.min.js")

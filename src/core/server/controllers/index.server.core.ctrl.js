@@ -1,11 +1,16 @@
 import { CONFIG } from '../config/config';
+import { UserController } from './user.server.core.controller';
 
 export class IndexController {
   static render(req, res) {
+    var user = null;
+    if (req.user) {
+      user = UserController.sanitizeUserForFrontEnd(req.user);
+    }
     res.render('index', {
       title: 'Hello World',
-      username: req.user ? req.user.username : null,
-      user: req.user ? JSON.stringify(req.user) : null,
+      username: user ? user.username : null,
+      user: user ? JSON.stringify(user) : null,
       auth: {
         google: CONFIG.google.enabled,
         twitter: CONFIG.twitter.enabled,

@@ -6,7 +6,7 @@ import mockery from 'mockery';
 var sandbox = sinon.createSandbox();
 
 describe('index.server.core.ctrl', () => {
-  var uut;
+  var uut, MockUserController;
   before(() => {
     mockery.registerAllowable('../index.server.core.ctrl');
     mockery.registerMock('../config/config', {
@@ -22,6 +22,14 @@ describe('index.server.core.ctrl', () => {
         }
       }
     });
+    MockUserController = {
+      sanitizeUserForFrontEnd: function() {
+        throw new Error('sanitizeUserForFrontEnd not mocked');
+      }
+    };
+    mockery.registerMock('./user.server.core.controller', {
+      UserController: MockUserController
+    });
     mockery.enable();
     uut = require('../index.server.core.ctrl').IndexController;
   });
@@ -33,20 +41,33 @@ describe('index.server.core.ctrl', () => {
   it('render index', () => {
     const mockReq = {
         user: {
-          username: 'Harold T. Pants'
+          _id: 'my-id',
+          username: 'Harold T. Pants',
+          otherPrivateStuff: 'undies'
         }
       },
       mockRes = {
         render: sandbox.stub()
       };
+    const mockSanitizedUser = {
+      _id: 'my-id',
+      username: 'Harold T. Pants'
+    };
+    sinon
+      .stub(MockUserController, 'sanitizeUserForFrontEnd')
+      .returns(mockSanitizedUser);
     uut.render(mockReq, mockRes);
+    expect(MockUserController.sanitizeUserForFrontEnd.calledOnce).to.eql(true);
+    expect(MockUserController.sanitizeUserForFrontEnd.getCall(0).args).to.eql([
+      mockReq.user
+    ]);
     expect(mockRes.render.calledOnce).to.eql(true);
     expect(mockRes.render.getCall(0).args).to.eql([
       'index',
       {
         title: 'Hello World',
         username: mockReq.user.username,
-        user: '{"username":"Harold T. Pants"}',
+        user: '{"_id":"my-id","username":"Harold T. Pants"}',
         auth: {
           google: true,
           facebook: false,
