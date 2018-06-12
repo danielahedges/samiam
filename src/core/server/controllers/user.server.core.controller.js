@@ -59,19 +59,21 @@ export class UserController {
     if (!req.user) {
       const user = new User(req.body);
       user.provider = 'local';
-      user.save(err => {
-        if (err) {
+      user
+        .save()
+        .then(() => {
+          req.login(user, err => {
+            if (err) {
+              return next(err);
+            }
+            return res.redirect('/');
+          });
+        })
+        .catch(err => {
           const message = getErrorMessage(err);
           req.flash('error', message);
           return res.redirect('/signup');
-        }
-        req.login(user, err => {
-          if (err) {
-            return next(err);
-          }
-          return res.redirect('/');
         });
-      });
     } else {
       return res.redirect('/');
     }
@@ -93,15 +95,11 @@ export class UserController {
     });
   }
   static saveOAuthUserProfile(req, profile, done) {
-    User.findOne(
-      {
-        provider: profile.provider,
-        providerId: profile.providerId
-      },
-      (err, user) => {
-        if (err) {
-          return done(err);
-        }
+    User.findOne({
+      provider: profile.provider,
+      providerId: profile.providerId
+    })
+      .then(user => {
         if (!user) {
           const possibleUsername =
             profile.username ||
@@ -109,14 +107,21 @@ export class UserController {
           User.findUniqueUsername(possibleUsername, null, availableUsername => {
             const newUser = new User(profile);
             newUser.username = availableUsername;
-            newUser.save(err => {
-              return done(err, newUser);
-            });
+            newUser
+              .save()
+              .then(() => {
+                return done(null, newUser);
+              })
+              .catch(err => {
+                return done(err);
+              });
           });
         }
-        return done(err, user);
-      }
-    );
+        return done(null, user);
+      })
+      .catch(err => {
+        return done(err);
+      });
   }
   static partialRedirectToLogin(req, res, next) {
     if (!req.isAuthenticated || !req.user) {
@@ -144,13 +149,15 @@ export class UserController {
     if (!id) {
       return res.status(400).send({ message: 'Could not find target user' });
     }
-    User.findById(id, (err, targetUser) => {
-      if (err || !targetUser) {
+    User.findById(id)
+      .exec()
+      .then(targetUser => {
+        req.targetUser = targetUser;
+        next();
+      })
+      .catch(() => {
         return res.status(400).send({ message: 'Could not find target user' });
-      }
-      req.targetUser = targetUser;
-      next();
-    });
+      });
   }
   static resetPassword(req, res) {
     if (!req.user.admin || !req.targetUser || !req.body.newPassword) {
@@ -158,12 +165,14 @@ export class UserController {
     }
     req.targetUser.setPassword(req.body.newPassword, (err, targetUser) => {
       targetUser.provisional = true;
-      targetUser.save(err => {
-        if (err) {
+      targetUser
+        .save()
+        .then(() => {
+          return res.json({});
+        })
+        .catch(err => {
           return res.status(400).send({ message: getErrorMessage(err) });
-        }
-        return res.json({});
-      });
+        });
     });
   }
   static requiresLogin(req, res, next) {
