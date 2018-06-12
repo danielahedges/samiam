@@ -11,10 +11,10 @@ form(action="/signin" method="post")
   div.input-field
     i.material-icons.prefix account_box
     input(id="usernameLogin" name="username" type="text" autocomplete="username")
-    label(for="username") {{'INDEX.USERNAME' | translate}}
+    label(for="usernameLogin") {{'INDEX.USERNAME' | translate}}
   div.input-field
     i.material-icons.prefix lock
     input(id="passwordLogin" name="password" type="password" autocomplete="current-password")
-    label(for="password") {{'INDEX.PASSWORD' | translate}}
+    label(for="passwordLogin") {{'INDEX.PASSWORD' | translate}}
   div.input-field
     button.btn.waves-effect.waves-light(type="submit") {{'INDEX.LOGIN_BUTTON' | translate}}
