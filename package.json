@@ -18,7 +18,12 @@
     "precommit": "npm run lint:fix && npm run test",
     "postinstall": "./scripts/build"
   },
-  "keywords": ["MongoDB", "Express", "Angular", "Node"],
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "Angular",
+    "Node"
+  ],
   "author": "Dan Hedges",
   "license": "MIT",
   "dependencies": {
