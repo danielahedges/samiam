@@ -41,3 +41,17 @@ already has node installed.
 1. `docker-compose up -d staging-deps`
 1. Open a browser to http://localhost:3000/.
 1. To shut down, `docker-compose down`
+
+## Deployment
+
+You can easily deploy onto Heroku for free, just follow these instructions.
+Other cloud providers are similar.
+
+1. Create a mongodb instance. [mLab](https://mlab.com) is a good resource.
+1. Create a [heroku app instance](https://dashboard.heroku.com/apps).
+1. Put the mongo connection string into the environment variable
+   `MONGODB_CONNECT` using the following command: `heroku config:set
+   MONGODB_CONNECT=[mongo_connect_url]`.
+1. Set `NODE_ENV`: `heroku config:set NODE_ENV=development`.
+1. Deploy by following the instructions in your heroku app dashboard. (You will
+   add heroku to the git remotes, then push to it).
