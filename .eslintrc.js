@@ -11,7 +11,8 @@ module.exports = {
   globals: {
     jQuery: true,
     $: true,
-    angular: true
+    angular: true,
+    M: true
   },
   rules: {
     indent: ['error', 2],

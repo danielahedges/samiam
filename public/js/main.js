@@ -22,7 +22,7 @@ mainApplicationModule.config([
   '$translateProvider',
   function($translateProvider) {
     $translateProvider
-      .translations('us', english)
+      .translations('us', english) // eslint-disable-line no-undef
       .useSanitizeValueStrategy('sanitizeParameters')
       .preferredLanguage('us');
   }
@@ -36,4 +36,6 @@ if (window.location.hash === '#_=_') {
 
 angular.element(document).ready(function() {
   angular.bootstrap(document, [mainApplicationModuleName]);
+  var elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems, {});
 });

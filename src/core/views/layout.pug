@@ -9,11 +9,13 @@ html
   body
     header
       nav(role="navigation")
-        div.nav-wrapper.container
+        div.nav-wrapper
           a.brand-logo#logo-container(href="/#!/")
             | #{title}
+          a.hide-on-large-only.left.sidenav-trigger(href="#", data-target="nav-mobile")
+            i.material-icons menu
           mixin links
-            if (user == null)
+            if (user == null || user === 'null')
               li
                 a(href="/login") {{ 'NAVBAR.LOGIN' | translate }}
               li
@@ -23,12 +25,10 @@ html
                 a.brown-text.disabled(href="/#!/") #{username}
               li
                 a(href="/signout") {{ 'NAVBAR.LOGOUT' | translate }}
-          ul.side-nav.hide-on-large-only#nav-mobile
-            +links
           ul.right.hide-on-med-and-down
             +links
-          a.button-collapse.hide-on-large-only(data-activates="nav-mobile" href="#")
-            i.material-icons menu
+    ul.sidenav#nav-mobile
+      +links
     main
       block content
         
