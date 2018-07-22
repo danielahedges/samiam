@@ -1,7 +1,7 @@
 # Samiam
 
-[![Run Status](https://api.shippable.com/projects/5b116041ddd0cc0600eb56b4/badge?branch=master)](https://app.shippable.com/github/danielahedges/samiam)
-[![Known Vulnerabilities](https://snyk.io/test/github/danielahedges/samiam/badge.svg)](https://snyk.io/test/github/danielahedges/samiam)
+[![Run Status](https://api.shippable.com/projects/5b54db3336661906001fe6a6/badge?branch=master)](https://app.shippable.com/github/danielahedges/samiam)
+[![Known Vulnerabilities](https://snyk.io/test/github/danielahedges/samiam/badge.svg?targetFile=package.json)](https://snyk.io/test/github/danielahedges/samiam?targetFile=package.json)
 
 Identity project for the homeless.
 
