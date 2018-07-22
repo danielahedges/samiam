@@ -12,4 +12,4 @@ build:
     - npm install
     - npm run build
     - npm test
-    - docker image build -t danhedges/monocot .
+    - docker image build -t danhedges/samiam .

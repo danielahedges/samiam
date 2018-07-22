@@ -1,11 +1,11 @@
 {
-  "name": "monocot",
-  "version": "0.2.0",
-  "description": "Seed project for an ES6 MEAN site",
+  "name": "samiam",
+  "version": "0.1.0",
+  "description": "Identity project for the homeless",
   "main": "build/server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/danielahedges/monocot.git"
+    "url": "https://github.com/danielahedges/samiam.git"
   },
   "scripts": {
     "build": "./scripts/build",

@@ -1,7 +1,7 @@
 version: '2'
 services:
   staging-deps:
-    image: monocot
+    image: danhedges/samiam
     environment:
       - NODE_ENV=development
       - PORT=3000

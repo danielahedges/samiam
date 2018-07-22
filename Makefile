@@ -6,7 +6,7 @@ ci:
 		staging-down
 
 docker-build:
-	docker build -t monocot .
+	docker build -t danhedges/samiam .
 
 clean:
 	docker-compose run --rm clean
