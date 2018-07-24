@@ -65,7 +65,7 @@ describe('index.server.core.ctrl', () => {
     expect(mockRes.render.getCall(0).args).to.eql([
       'index',
       {
-        title: 'Hello World',
+        title: 'Samiam',
         username: mockReq.user.username,
         user: '{"_id":"my-id","username":"Harold T. Pants"}',
         auth: {

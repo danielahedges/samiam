@@ -8,7 +8,7 @@ export class IndexController {
       user = UserController.sanitizeUserForFrontEnd(req.user);
     }
     res.render('index', {
-      title: 'Hello World',
+      title: 'Samiam',
       username: user ? user.username : null,
       user: user ? JSON.stringify(user) : null,
       auth: {
