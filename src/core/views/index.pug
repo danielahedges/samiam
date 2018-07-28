@@ -7,6 +7,8 @@ block content
 	else
 		// No user logged in.
 		div.container
+			include public_validationForm
+		div.container
 			include messages
 			include loginForm
 			h3 {{'INDEX.SIGNUP' | translate}}

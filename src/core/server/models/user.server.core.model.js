@@ -22,6 +22,11 @@ const UserSchema = new Schema({
   },
   providerId: String,
   providerData: {},
+  role: {
+    // valid values: ['admin', 'case', 'service', 'audit', 'peh']
+    type: String,
+    required: true
+  },
   created: {
     type: Date,
     default: Date.now

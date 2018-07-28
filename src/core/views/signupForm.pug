@@ -15,6 +15,7 @@ div(data-ng-controller="UserController as ctrl", data-ng-init="ctrl.initSignUp()
         input(id="usernameSignup", name="username", type="text", autocapitalize="none", autocorrect="off", required)
         label(for="usernameSignup") Username
     include passwordWidget
+    input(type="hidden", name="role", value=role)
     div.input-field
       //- input(type="hidden", name="code", value=signupcode)
       input.btn(type="submit",

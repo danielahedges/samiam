@@ -6,6 +6,8 @@ class UserController {
     this.score = 0;
     angular.element('#sign-up-form').preventDoubleSubmission();
   }
+  initSignUp() {
+  }
   initChangePassword() {
     this.password = '';
     this.repeatPassword = '';

@@ -1,0 +1,13 @@
+h3 Identify By Code
+div(data-ng-contorller="IdentityController as pctrl", data-ng-init="pctrl.init()")
+  form#public-identify-form
+    div.row
+      div.input-field.col.s12.m6
+        i.material-icons.prefix confirmation_number
+        input(id="code", name="code", type="text", autocapitalize="none", autocorrect="off", required)
+        label(for="code") Validation Code
+      div.input-field.col.s12.m6
+        input.btn(type="submit",
+          data-ng-disabled="!pctrl.validate()",
+          data-ng-click="pctrl.go()",
+          data-ng-value="Submit")

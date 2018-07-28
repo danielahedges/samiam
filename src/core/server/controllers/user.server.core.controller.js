@@ -55,6 +55,13 @@ export class UserController {
       return res.redirect('/');
     }
   }
+  static renderAdminSignup(req, res) {
+    if (!req.user) {
+      res.render('adminSignUp', getLayoutRender(req, 'Admin Sign-up Form'));
+    } else {
+      return res.redirect('/');
+    }
+  }
   static signup(req, res, next) {
     if (!req.user) {
       const user = new User(req.body);
@@ -138,7 +145,15 @@ export class UserController {
     next();
   }
   static requiresAdmin(req, res, next) {
-    if (!req.user || !req.user.admin) {
+    if (!req.user || req.user.role !== 'admin') {
+      return res.status(403).send({
+        message: 'User is not authorized'
+      });
+    }
+    next();
+  }
+  static requiresCaseWorker(req, res, next) {
+    if (!req.user || req.user.role !== 'case') {
       return res.status(403).send({
         message: 'User is not authorized'
       });

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div.container
+    h3 Identification System
+
+    div.container
+      if (peh)
+        //- Describe the PEH
+        table
+          tr
+            th First Name
+            td #{peh.firstName}
+          tr
+            th Last Name
+            td #{peh.lastName}
+          tr
+            th Code
+            td #{peh.code}
+      else
+        h4 Identification Not Found
+        p Did not find identification for #{code}

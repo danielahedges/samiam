@@ -1,6 +1,7 @@
 import { CONFIG } from './config';
 import mongoose from 'mongoose';
 import '../models/user.server.core.model';
+import '../models/peh.server.core.model';
 
 export class MongooseConfig {
   static init() {
