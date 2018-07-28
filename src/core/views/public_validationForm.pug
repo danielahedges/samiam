@@ -1,12 +1,11 @@
 h3 Identify By Code
-div
-  form#public-identify-form(method="get", action="/")
-    div.row
-      div.input-field.col.s12.m6
-        i.material-icons.prefix confirmation_number
-        //- input(id="code", name="code", type="text", autocapitalize="none", autocorrect="off", required)
-        input(id="code", name="code", type="text", onchange="document.getElementById('public-identify-form').action = '/pub/'+this.value;")
-        label(for="code") Validation Code
-      div.input-field.col.s12.m6
-        input.btn(type="submit",
-          value="Submit")
+form#public-identify-form(method="get", action="/")
+  div.row
+    div.input-field.col.s12.m6
+      i.material-icons.prefix confirmation_number
+      //- input(id="code", name="code", type="text", autocapitalize="none", autocorrect="off", required)
+      input(id="code", type="text", onchange="document.getElementById('public-identify-form').action = '/pub/'+this.value;")
+      label(for="code") Validation Code
+    div.input-field.col.s12.m6
+      input.btn(type="submit",
+        value="Submit")
