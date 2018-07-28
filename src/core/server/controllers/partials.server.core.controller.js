@@ -40,7 +40,19 @@ export class PartialsController {
       });
     // } else if (req.user.role==='admin') { ...
     } else {
-      res.redirect('/views/core/home');
+      const mapping = {
+        admin: '/views/core/adminHome',
+        audit: '/views/core/auditHome',
+        case: '/views/core/caseHome',
+        peh: '/views/core/pehHome',
+        service: '/views/core/serviceHome'
+      };
+      if (req.user.role && mapping[req.user.role]) {
+        return res.redirect(mapping[req.user.role]);
+      } else {
+        console.log('Error! Unrecognized role');  // eslint-disable-line no-console
+        return res.render('core_empty', {});
+      }
     }
   }
 }
