@@ -1,1 +1,32 @@
 h3 Hello Admin!
+
+h4 Users
+div.container(data-ng-controller="AdminController as ctrl", data-ng-init="ctrl.init()")
+  table
+    tr
+      th Username
+      th Role
+    tr(data-ng-repeat="user in ctrl.users")
+      td {{user.username}}
+      td {{user.role}}
+  h5 Create User
+  form#create-user-form(data-ng-submit="ctrl.createUser()")
+    div.row
+      div.input-field.col.s12.m6
+        i.material-icons.prefix account_box
+        input(id="usernameSignup", name="username", data-ng-model="ctrl.username", type="text", autocapitalize="none", autocorrect="off", required)
+        label(for="usernameSignup") Username
+      div.input-field.col.s12.m6
+        i.material-icons.prefix lock
+        input(id="password", name="password", data-ng-model="ctrl.password", type="password")
+        label(for="password") {{ 'INDEX.PASSWORD' | translate }}
+      div.input-field.col.s12.m6
+        select(data-ng-model="ctrl.role")
+          option(value="", disabled, selected) Choose Role
+          option(value="peh") Person Experiencing Homelessness
+          option(value="case") Case Worker
+          option(value="service") Service Provider
+          option(value="audit") Auditor
+        label Role
+      div.input-field.col.s12.m6
+        input.btn(type="submit")

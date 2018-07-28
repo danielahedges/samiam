@@ -15,6 +15,11 @@ export class UserRoutes {
       .post(UserController.signup);
 
     app
+      .route('/users')
+      .get(UserController.requiresAdmin, UserController.listUsers)
+      .post(UserController.requiresAdmin, UserController.createUser);
+
+    app
       .route('/signin')
       .get(UserController.renderSignIn)
       .post(
@@ -27,8 +32,7 @@ export class UserRoutes {
     // app.route('/password')
     //   .post(UserController.requiresLogin, UserController.changePassword);
 
-    app.route('/passwordStrength')
-      .post(UserController.checkPasswordStrength);
+    app.route('/passwordStrength').post(UserController.checkPasswordStrength);
 
     app.get('/signout', UserController.signout);
     app.get(

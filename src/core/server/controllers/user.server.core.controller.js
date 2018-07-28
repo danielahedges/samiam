@@ -41,6 +41,22 @@ export class UserController {
   static init() {
     User = mongoose.model('User');
   }
+  static listUsers(req, res) {
+    const projection = {
+      username: true,
+      role: true
+    };
+    return User.find({}, projection)
+      .exec()
+      .then(users => {
+        return res.json(users);
+      });
+  }
+  static createUser(req, res) {
+    const user = new User(req.body);
+    user.provider = 'local';
+    user.save().then(() => res.status(204).send({}));
+  }
   static renderSignIn(req, res) {
     if (!req.user) {
       res.render('signin', getLayoutRender(req, 'Sign-in Form'));
