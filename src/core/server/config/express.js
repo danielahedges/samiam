@@ -26,10 +26,12 @@ export function init() {
 
   app.use(
     bodyParser.urlencoded({
-      extended: true
+      extended: true,
+      limit: '50mb',
+      urlencoded: { limit: '50mb', extended: true }
     })
   );
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: '50mb', extended: true }));
   app.use(methodOverride());
 
   app.use(

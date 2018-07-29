@@ -48,6 +48,19 @@ export class ApiRoutes {
         PehController.deleteAgent
       );
 
+    app
+      .route('/documents')
+      .get(
+        UserController.requiresLogin,
+        UserController.requiresRole('peh'),
+        PehController.listDocuments
+      )
+      .post(
+        UserController.requiresLogin,
+        UserController.requiresRole('peh'),
+        PehController.addDocument
+      );
+
     app.param('pehid', CaseController.setPehid);
     app.param('agentId', PehController.setAgentId);
   }

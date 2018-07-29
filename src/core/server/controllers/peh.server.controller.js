@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
-var User;
+var User, DocModel;
 
 export class PehController {
   static init() {
     User = mongoose.model('User');
+    DocModel = mongoose.model('Document');
   }
   static listAgents(req, res) {
     User.find(
@@ -57,5 +58,37 @@ export class PehController {
             res.status(204).send({});
           });
       });
+  }
+  static listDocuments(req, res) {
+    return DocModel.find(
+      {
+        pehid: req.user._id
+      },
+      {
+        filename: true,
+        docType: true,
+        format: true,
+        status: true,
+        binarySize: true
+      }
+    )
+      .exec()
+      .then(documents => {
+        res.json(documents);
+      });
+  }
+  static addDocument(req, res) {
+    var doc = new DocModel({
+      pehid: req.user._id,
+      filename: req.body.filename,
+      docType: req.body.docType,
+      format: req.body.format,
+      base64: req.body.base64,
+      status: null,
+      binarySize: req.body.base64.length
+    });
+    return doc.save().then(() => {
+      res.status(204).send({});
+    });
   }
 }

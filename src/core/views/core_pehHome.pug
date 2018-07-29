@@ -1,17 +1,43 @@
 h3 User
 div(data-ng-controller="PehController as ctrl", data-ng-init="ctrl.init()")
-    h5 Agents
-    p Agents are users who can make transactions on your behalf.
-    div(data-ng-if="ctrl.agents && ctrl.agents.length > 0")
-      table
-        tr
-          th Username
-          th Role
-          th Actions
-        tr(data-ng-repeat="agent in ctrl.agents")
-          td {{agent.username}}
-          td {{agent.role}}
-          td
-            a(href="#", data-ng-click='ctrl.deleteAgent(agent._id)')
-              i.material-icons delete
-    p(data-ng-if="!ctrl.agents || ctrl.agents.length === 0") No agents found.
+  h5 Documents
+  div(data-ng-if="ctrl.documents && ctrl.documents.length > 0")
+    table
+      tr
+        th Filename
+        th Type
+        th Format
+        th Status
+        th Size
+      tr(data-ng-repeat="doc in ctrl.documents")
+        td {{doc.filename}}
+        td {{doc.docType}}
+        td {{doc.format}}
+        td {{doc.status}}
+        td {{doc.binarySize}}
+  p(data-ng-if="!ctrl.agents || ctrl.agents.length === 0") No documents.
+  h6 Add Document
+  form(data-ng-submit="documentCreate()", novalidate)
+    div.row
+      div.col.s12.m9.input-field
+        input.dropify#photo-file(type="file", name="photo-file",
+          data-max-file-size="6M", data-show-remove="true",
+          data-allowed-file-extensions="jpg")
+      div.col.s12.m3.input-field
+        button.btn.waves-effect.waves-light(data-ng-click='ctrl.addDocument()')
+          i.material-icons add
+  h5 Agents
+  p Agents are users who can make transactions on your behalf.
+  div(data-ng-if="ctrl.agents && ctrl.agents.length > 0")
+    table
+      tr
+        th Username
+        th Role
+        th Actions
+      tr(data-ng-repeat="agent in ctrl.agents")
+        td {{agent.username}}
+        td {{agent.role}}
+        td
+          a(href="#", data-ng-click='ctrl.deleteAgent(agent._id)')
+            i.material-icons delete
+  p(data-ng-if="!ctrl.agents || ctrl.agents.length === 0") No agents found.
