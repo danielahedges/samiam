@@ -10,6 +10,7 @@ import { IndexRoutes } from '../routes/index.server.core.routes';
 import { UserRoutes } from '../routes/user.server.core.routes';
 import { PartialsRoutes } from '../routes/partials.server.core.routes';
 import { PublicRoutes } from '../routes/public.server.core.routes';
+import { ApiRoutes } from '../routes/api.server.routes.js';
 import { moduleList } from '../../../modules';
 import { CONFIG } from './config';
 import _ from 'lodash';
@@ -53,6 +54,7 @@ export function init() {
   UserRoutes.init(app);
   PartialsRoutes.init(app);
   PublicRoutes.init(app);
+  ApiRoutes.init(app);
 
   return app;
 }

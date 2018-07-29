@@ -1,1 +1,21 @@
-h3 Hello, Case Worker!
+h3 Hello, Case Worker
+div.container(data-ng-controller="CaseController as ctrl", data-ng-init="ctrl.init()")
+  h5 My Clients
+  div(data-ng-if="ctrl.pehArray")
+    table
+      tr
+        th Username
+        th First Name
+        th Last Name
+        th Code
+        th Created
+      tr(data-ng-repeat="client in ctrl.pehArray")
+        td {{client.username}}
+        td {{client.peh.firstName}}
+        td {{client.peh.lastName}}
+        td {{client.peh.code}}
+        td {{client.created}}
+  div(data-ng-if="!ctrl.pehArray || ctrl.pehArray.length===0")
+    p None Found
+  h5 New Client
+  

@@ -214,6 +214,14 @@ export class UserController {
     }
     next();
   }
+  static requiresRole(role) {
+    return (req, res, next) => {
+      if (!req.user || req.user.role !== role) {
+        return res.status(403).send('forbidden');
+      }
+      next();
+    };
+  }
   static sanitizeUserForFrontEnd(user) {
     return {
       _id: '' + user._id + '',

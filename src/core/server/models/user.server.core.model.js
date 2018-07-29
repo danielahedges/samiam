@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import { PehSchema } from './peh.server.core.model';
 
 const Schema = mongoose.Schema;
 
@@ -27,6 +28,19 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  peh: PehSchema,
+  agents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  clients: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
   created: {
     type: Date,
     default: Date.now

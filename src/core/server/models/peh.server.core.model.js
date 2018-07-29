@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PehSchema = mongoose.Schema({
+export const PehSchema = mongoose.Schema({
   code: {
     required: true,
     type: String
