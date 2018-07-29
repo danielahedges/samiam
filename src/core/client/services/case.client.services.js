@@ -5,9 +5,13 @@ angular.module('Core').factory('CaseService', [
       return $http.get('/pehs').then(response => response.data);
     }
 
+    function pehCreate(peh) {
+      return $http.post('/pehs', peh).then(response => response.data);
+    }
+
     return {
-      pehList
+      pehList,
+      pehCreate
     };
   }
 ]);
-

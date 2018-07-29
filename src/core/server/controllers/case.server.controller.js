@@ -36,7 +36,7 @@ export class CaseController {
   }
   static pehCreate(req, res) {
     return PehService.create(req.body, req.user)
-      .tap(peh => {
+      .then(peh => {
         return User.update(
           {
             _id: req.user._id
@@ -46,7 +46,9 @@ export class CaseController {
               clients: peh._id
             }
           }
-        );
+        ).then(() => {
+          return peh;
+        });
       })
       .then(peh => {
         return res.json(peh);

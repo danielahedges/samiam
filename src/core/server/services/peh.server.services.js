@@ -14,16 +14,16 @@ export class PehService {
       birthDate: body.birthDate,
       code: Util.generateRandomCode(8)
     };
-    var user = new User({
+    var userData = {
       username: body.username,
       password: body.password,
       provider: 'local',
       role: 'peh',
       peh: peh
-    });
+    };
     if (creator) {
-      user.agents = [creator._id];
+      userData.agents = [creator._id];
     }
-    return user.save().exec();
+    return new User(userData).save();
   }
 }

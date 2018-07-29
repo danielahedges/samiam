@@ -18,9 +18,7 @@ html
           mixin links
             if (user == null || user === 'null')
               li
-                a(href="/login") {{ 'NAVBAR.LOGIN' | translate }}
-              li
-                a(href="/signup") {{ 'NAVBAR.SIGNUP' | translate }}
+                a(href="/") {{ 'NAVBAR.LOGIN' | translate }} / {{ 'NAVBAR.SIGNUP' | translate }}
             else
               li.orange-text
                 a.brown-text.disabled(href="/#!/") #{username}

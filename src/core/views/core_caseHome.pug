@@ -8,14 +8,29 @@ div.container(data-ng-controller="CaseController as ctrl", data-ng-init="ctrl.in
         th First Name
         th Last Name
         th Code
-        th Created
       tr(data-ng-repeat="client in ctrl.pehArray")
         td {{client.username}}
         td {{client.peh.firstName}}
         td {{client.peh.lastName}}
         td {{client.peh.code}}
-        td {{client.created}}
   div(data-ng-if="!ctrl.pehArray || ctrl.pehArray.length===0")
     p None Found
   h5 New Client
-  
+  form#create-client-form(data-ng-submit="ctrl.createClient()")
+    div.row
+      div.input-field.col.s12.m6
+        i.material-icons.prefix account_box
+        input(id="username" name="username" type="text" autocomplete="username", data-ng-model="ctrl.username")
+        label(for="username") {{'INDEX.USERNAME' | translate}}
+      div.input-field.col.s12.m6
+        i.material-icons.prefix lock
+        input(id="password" name="password" type="password" autocomplete="current-password", data-ng-model="ctrl.password")
+        label(for="password") {{'INDEX.PASSWORD' | translate}}
+      div.input-field.col.s12.m6
+        input(id="first-name", name="first-name", type="text", data-ng-model="ctrl.firstName")
+        label(for="first-name") First Name
+      div.input-field.col.s12.m6
+        input(id="last-name", name="last-name", type="text", data-ng-model="ctrl.lastName")
+        label(for="last-name") Last Name
+      div.input-field.col.s12.m6
+        input.btn.waves-effect.waves-light(type="submit", value="Create")

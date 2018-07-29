@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import { UserController } from './user.server.core.controller';
 
-var Peh;
+var User;
 
 export class PublicController {
   static init() {
-    Peh = mongoose.model('Peh');
+    User = mongoose.model('User');
   }
   static setCode(req, res, next, code) {
     req.code = code;
@@ -13,12 +13,12 @@ export class PublicController {
   }
   static retrievePeh(req, res, next) {
     // Take req.code, look it up in the PEH database.
-    Peh.findOne({
-      code: req.code
+    User.findOne({
+      'peh.code': req.code
     })
       .exec()
-      .then(peh => {
-        req.peh = peh;
+      .then(user => {
+        req.peh = user.peh;
         next();
       })
       .catch(() => {
