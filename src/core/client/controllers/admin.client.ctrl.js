@@ -3,13 +3,15 @@ class AdminController {
     this.deps = deps;
   }
   init() {
-    this._initUserList();
+    this.refresh();
     this._initSelect();
   }
-  _initUserList() {
+  refresh() {
     this.deps.AdminService.listUsers().then(users => {
       this.users = users;
     });
+    this.username = '';
+    this.password = '';
   }
   _initSelect() {
     this.deps.$scope.$$postDigest(() => {
@@ -23,7 +25,7 @@ class AdminController {
       role: this.role
     };
     this.deps.AdminService.createUser(userToCreate).then(() => {
-      this._initUserList();
+      this.refresh();
     });
   }
 }

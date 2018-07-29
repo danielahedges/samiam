@@ -10,6 +10,10 @@ class CaseController {
       M.updateTextFields();
       M.textareaAutoResize($('.materialize-textarea'));
     });
+    this.username = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
     this.deps.CaseService.pehList().then(pehArray => {
       this.pehArray = pehArray;
     });
