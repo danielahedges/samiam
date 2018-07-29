@@ -10,7 +10,8 @@ div(data-ng-controller="PehController as ctrl", data-ng-init="ctrl.init()")
         th Status
         th Size
       tr(data-ng-repeat="doc in ctrl.documents")
-        td {{doc.filename}}
+        td
+          a(data-ng-href="/documents/{{doc._id}}") {{doc.filename}}
         td {{doc.docType}}
         td {{doc.format}}
         td {{doc.status}}

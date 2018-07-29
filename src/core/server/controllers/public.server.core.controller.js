@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import { UserController } from './user.server.core.controller';
 
-var User;
+var User, DocModel;
 
 export class PublicController {
   static init() {
     User = mongoose.model('User');
+    DocModel = mongoose.model('Document');
   }
   static setCode(req, res, next, code) {
     req.code = code;
@@ -24,6 +25,25 @@ export class PublicController {
       .catch(() => {
         req.peh = null;
         next();
+      });
+  }
+  static findLink(req, res, next) {
+    DocModel.find(
+      {
+        // pehid: req.peh._id,
+        status: 'Verified'
+      },
+      {
+        filename: true
+      }
+    )
+      .exec()
+      .then(docs => {
+        if (docs && docs.length) {
+          req.peh.link.addr = '/documents/' + docs[0]._id;
+          req.peh.link.text = docs[0].filename;
+          next();
+        }
       });
   }
   static renderPeh(req, res) {

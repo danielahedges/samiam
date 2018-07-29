@@ -84,7 +84,7 @@ export class PehController {
       docType: req.body.docType,
       format: req.body.format,
       base64: req.body.base64,
-      status: null,
+      status: 'Unverified',
       binarySize: req.body.base64.length
     });
     return doc.save().then(() => {
