@@ -1,1 +1,17 @@
-h3 Hello, User!
+h3 User
+div(data-ng-controller="PehController as ctrl", data-ng-init="ctrl.init()")
+    h5 Agents
+    p Agents are users who can make transactions on your behalf.
+    div(data-ng-if="ctrl.agents && ctrl.agents.length > 0")
+      table
+        tr
+          th Username
+          th Role
+          th Actions
+        tr(data-ng-repeat="agent in ctrl.agents")
+          td {{agent.username}}
+          td {{agent.role}}
+          td
+            a(href="#", data-ng-click='ctrl.deleteAgent(agent._id)')
+              i.material-icons delete
+    p(data-ng-if="!ctrl.agents || ctrl.agents.length === 0") No agents found.

@@ -1,11 +1,15 @@
 import { CaseController } from '../controllers/case.server.controller';
 import { UserController } from '../controllers/user.server.core.controller';
 import { PehService } from '../services/peh.server.services';
+import { PehController } from '../controllers/peh.server.controller';
 
 export class ApiRoutes {
   static init(app) {
     PehService.init();
     CaseController.init();
+    PehController.init();
+
+    // Case workers
     app
       .route('/pehs')
       .get(
@@ -28,6 +32,23 @@ export class ApiRoutes {
         CaseController.pehRead
       );
 
+    app
+      .route('/agents')
+      .get(
+        UserController.requiresLogin,
+        UserController.requiresRole('peh'),
+        PehController.listAgents
+      );
+
+    app
+      .route('/agents/:agentId')
+      .delete(
+        UserController.requiresLogin,
+        UserController.requiresRole('peh'),
+        PehController.deleteAgent
+      );
+
     app.param('pehid', CaseController.setPehid);
+    app.param('agentId', PehController.setAgentId);
   }
 }
